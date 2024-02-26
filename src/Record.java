@@ -15,6 +15,18 @@ public class Record {
         this.confidence = other.confidence;
     }
 
+    public String getTerm() {
+        return this.term;
+    }
+
+    public String getStatement() {
+        return this.statement;
+    }
+
+    public Double getConfidence() {
+        return this.confidence;
+    }
+
     public String toString() {
         return term + " " + statement + " " + confidence;
     }
