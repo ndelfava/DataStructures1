@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class ActionsBST {
 
+    static BinaryTree records;
+
 
 
     public static void loadKbBST(String filename) throws FileNotFoundException {
@@ -19,7 +21,7 @@ public class ActionsBST {
             numLines++;
         }
 
-        BinaryTree records = new BinaryTree();
+        records = new BinaryTree();
 
         for (int i = 0; i < lines.size(); i++) {
             String term = lines.get(i).split("\t")[0];
@@ -28,20 +30,18 @@ public class ActionsBST {
             records.addNode(term, statement, confidence);
 
         }
-        records.inOrderTraverse(records.root);
+        System.out.println("Loadeddd");
     }
 
     public static void addStatement(String term, String statement, double confidence) {
 
-        Record record = new Record(term, statement, confidence);
-        //addToBST(record);
+        records.addNode(term, statement, confidence);
 
         System.out.println("added");
     }
 
     public static String searchByTerm(String term) {
-        System.out.println("searched " + term);
-        return "";
+
     }
 
     public static String termAndStatement(String term, String statement) {

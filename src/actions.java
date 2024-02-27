@@ -59,12 +59,23 @@ public class actions {
             System.out.println("No record found with given term.");
 
         }
-
-
     }
 
-    public static String termAndStatement(String term, String statement) {
-        System.out.println("searched");
-        return "";
+    public static void termAndStatement(String t, String s) {
+        if (records == null) {
+            System.out.println("No data loaded into the system. Please select a file in option (1) and try again...");
+        }
+        else {
+            for (int i=0;i < records.length; i++) {
+                if (records[i].getTerm().equals(t) && records[i].getStatement().equals(s)) {
+                    System.out.println("The statement was found and has a confidence score of " + records[i].getConfidence() + ".");
+                    break;
+                }
+
+            }
+            System.out.println("No record found with given term.");
+
+        }
+
     }
 }

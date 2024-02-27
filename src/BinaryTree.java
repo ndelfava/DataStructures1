@@ -2,6 +2,9 @@ public class BinaryTree {
 
     Node root;
 
+
+    
+
     public void inOrderTraverse(Node focusNode) {
         if (focusNode != null) {
             inOrderTraverse(focusNode.leftChild);
