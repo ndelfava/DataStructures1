@@ -40,7 +40,15 @@ public class ActionsBST {
         System.out.println("added");
     }
 
-    public static String searchByTerm(String term) {
+    public static void searchByTerm(String term) {
+
+//        if (records.search(records.root, term) == null) {
+//            System.out.println("Sorry, found nawt :(");
+//        }
+//        else {
+//            System.out.println("Statement found: " + records.search(records.root, term).statement + " (Confidence Score: " + records.search(records.root, term).confidence + ")");
+//        }
+        records.inOrderTraverse(false, records.root, term);
 
     }
 

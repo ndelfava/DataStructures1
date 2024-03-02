@@ -3,13 +3,31 @@ public class BinaryTree {
     Node root;
 
 
-    
+    Node search(Node root, String term) {
+        // Base Cases: root is null or key is present at root
+        if (root == null || root.term == term)
+            return root;
 
-    public void inOrderTraverse(Node focusNode) {
-        if (focusNode != null) {
-            inOrderTraverse(focusNode.leftChild);
-            System.out.println(focusNode.term);
-            inOrderTraverse(focusNode.rightChild);
+        // Key is greater than root's key
+        if (root.term.compareTo(term) < 0)
+            return search(root.rightChild, term);
+
+        // Key is smaller than root's key
+        return search(root.leftChild, term);
+    }
+
+    public void inOrderTraverse(boolean found, Node root, String term) {
+
+        if (root != null && !found) {
+            inOrderTraverse(false, root.leftChild, term);
+            if (root.term.equals(term)) {
+                found = true;
+                System.out.println("Statement found: " + root.statement + " (Confidence Level: " + root.confidence + ")");
+            }
+            inOrderTraverse(false, root.rightChild, term);
+        }
+        else {
+            System.out.println("Nawt");
         }
     }
 

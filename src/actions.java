@@ -20,29 +20,50 @@ public class actions {
             numLines++;
         }
 
+        if (records == null) {
+            records = new Record[numLines-1];
 
-        records = new Record[numLines];
+            for (int i = 0; i < lines.size(); i++) {
+                String term = lines.get(i).split("\t")[0];
+                String statement = lines.get(i).split("\t")[1];
+                Double confidence = Double.valueOf(lines.get(i).split("\t")[2]);
+                Record record = new Record(term, statement, confidence);
+                records[i] = record;
+            }
 
-        for (int i = 0; i < lines.size(); i++) {
-            String term = lines.get(i).split("\t")[0];
-            String statement = lines.get(i).split("\t")[1];
-            Double confidence = Double.valueOf(lines.get(i).split("\t")[2]);
-            Record record = new Record(term, statement, confidence);
-            records[i] = record;
+
+            System.out.println("Loadeddddd");
+        }
+        else {
+
+            for (int i = 0; i < lines.size(); i++) {
+                String term = lines.get(i).split("\t")[0];
+                String statement = lines.get(i).split("\t")[1];
+                Double confidence = Double.valueOf(lines.get(i).split("\t")[2]);
+                for (int j=0; j< records.length; j++) {
+                    if (term.equals(records[j].getTerm())) {
+                        Record r = new Record(term, statement, confidence);
+                        records[j] = r;
+                    }
+                }
+            }
+            System.out.println("All items updated.");
+
+
         }
 
 
-        System.out.println("Loadeddddd");
+
 
     }
 
-    public static void addStatement(String term, String statement, double confidence) {
-
-        Record record = new Record(term, statement, confidence);
-        //addToBST(record);
-
-        System.out.println("added");
-    }
+//    public static void addStatement(String term, String statement, double confidence) {
+//
+//        Record record = new Record(term, statement, confidence);
+//        //addToBST(record);
+//
+//        System.out.println("added");
+//    }
 
     public static void searchByTerm(String t) {
         if (records == null) {
@@ -54,9 +75,12 @@ public class actions {
                     System.out.println("Statement found: " + records[i].getStatement() + " (Confidence score: " + records[i].getConfidence() + ")");
                     break;
                 }
+                if (i == records.length && !(records[i].getTerm().equals(t))) {
+                    System.out.println("No record found with given term.");
+
+                }
 
             }
-            System.out.println("No record found with given term.");
 
         }
     }
@@ -67,7 +91,7 @@ public class actions {
         }
         else {
             for (int i=0;i < records.length; i++) {
-                if (records[i].getTerm().equals(t) && records[i].getStatement().equals(s)) {
+                if (records[i].getTerm().toLowerCase().equals(t) && records[i].getStatement().toLowerCase().equals(s)) {
                     System.out.println("The statement was found and has a confidence score of " + records[i].getConfidence() + ".");
                     break;
                 }
