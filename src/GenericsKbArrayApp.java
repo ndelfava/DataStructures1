@@ -4,7 +4,7 @@ import java.util.Scanner;
 import static java.lang.Double.parseDouble;
 
 
-public class Main {
+public class GenericsKbArrayApp {
 
     static int action;
 
@@ -30,7 +30,7 @@ public class Main {
                 case 1:
                     System.out.println("Enter file name: ");
                     String filename = keyboard.nextLine();
-                    actions.loadKb(filename);
+                    ActionsArray.loadKb(filename);
                     break;
 //                case 2:
 //                    System.out.println("Enter the term: ");
@@ -44,14 +44,14 @@ public class Main {
                 case 2:
                     System.out.println("Enter the term to search: ");
                     String term = keyboard.nextLine();
-                    actions.searchByTerm(term);
+                    ActionsArray.searchByTerm(term);
                     break;
                 case 3:
                     System.out.println("Enter the term: ");
                     String term4 = keyboard.nextLine().toLowerCase();
                     System.out.println("Enter the statement to search for: ");
                     String state = keyboard.nextLine().toLowerCase();
-                    actions.termAndStatement(term4, state);
+                    ActionsArray.termAndStatement(term4, state);
                     break;
                 case 4:
                     System.exit(0);
