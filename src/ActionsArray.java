@@ -31,8 +31,8 @@ public class ActionsArray {
                 records[i] = record;
             }
 
-
             System.out.println("Loadeddddd");
+
         }
         else {
 
@@ -41,7 +41,7 @@ public class ActionsArray {
                 String statement = lines.get(i).split("\t")[1];
                 Double confidence = Double.valueOf(lines.get(i).split("\t")[2]);
                 for (int j=0; j< records.length; j++) {
-                    if (term.equals(records[j].getTerm())) {
+                    if ((term.equals(records[j].getTerm()) && (confidence >= records[j].getConfidence()))) {
                         Record r = new Record(term, statement, confidence);
                         records[j] = r;
                     }

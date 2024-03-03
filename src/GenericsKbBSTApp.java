@@ -52,7 +52,7 @@ public class GenericsKbBSTApp {
                     System.out.println("Enter the term: ");
                     String term4 = keyboard.nextLine();
                     System.out.println("Enter the statement to search for: ");
-                    String state = keyboard.nextLine();
+                    String state = keyboard.nextLine().toLowerCase();
                     ActionsBST.termAndStatement(term4, state);
                     break;
                 case 5:
@@ -79,4 +79,3 @@ public class GenericsKbBSTApp {
 
 
 }
-
