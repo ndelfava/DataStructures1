@@ -3,33 +3,28 @@ public class BinaryTree {
     Node root;
 
 
-    Node search(Node root, String term) {
-        // Base Cases: root is null or key is present at root
-        if (root == null || root.term == term)
-            return root;
+    public void inOrderTraverse(Node current) {
 
-        // Key is greater than root's key
-        if (root.term.compareTo(term) < 0)
-            return search(root.rightChild, term);
-
-        // Key is smaller than root's key
-        return search(root.leftChild, term);
+        if (current != null) {
+            inOrderTraverse(current.leftChild);
+            System.out.println(current.term);
+            inOrderTraverse(current.rightChild);
+        }
     }
 
-    public void inOrderTraverse(boolean found, Node root, String term) {
+    public Node search(Node root, String t) {
+        if (root == null) return null;
+        if (root.term.equals(t)) return root;
 
-        if (root != null && !found) {
-            inOrderTraverse(false, root.leftChild, term);
-            if (root.term.equals(term)) {
-                found = true;
-                System.out.println("Statement found: " + root.statement + " (Confidence Level: " + root.confidence + ")");
-            }
-            inOrderTraverse(false, root.rightChild, term);
+        if (t.compareTo(root.term) < 0) {
+            return search(root.leftChild, t);
         }
         else {
-            System.out.println("Nawt");
+            return search(root.rightChild, t);
         }
     }
+
+
 
     public void addNode(String term, String statement, Double confidence) {
         Node newNode = new Node(term, statement, confidence);
@@ -45,7 +40,7 @@ public class BinaryTree {
             while (true) {
                 parent = focusNode;
 
-                if (term.compareTo(focusNode.term) == -1) {
+                if (term.compareTo(focusNode.term) < 0) {
 
                     focusNode = focusNode.leftChild;
 
