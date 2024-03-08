@@ -38,7 +38,7 @@ public class ActionsBST {
                 String term = lines.get(i).split("\t")[0];
                 String statement = lines.get(i).split("\t")[1];
                 Double confidence = Double.valueOf(lines.get(i).split("\t")[2]);
-                if ((records.search(records.root, term) != null)) {
+                if ((records.search(records.root, term) != null) && confidence >= records.search(records.root,term).confidence)  {
                     records.search(records.root, term).statement = statement;
                     records.search(records.root, term).confidence = confidence;
                 }
@@ -50,12 +50,16 @@ public class ActionsBST {
     }
 
     public static void addStatement(String term, String statement, double confidence) {
-        if (records.search(records.root, term) != null) {
-            System.out.println("Term already in database.");
+        if (records.search(records.root, term) != null && confidence >= records.search(records.root, term).confidence) {
+            records.search(records.root, term).statement = statement;
+            records.search(records.root, term).confidence = confidence;
+        }
+        else if (records.search(records.root, term) != null && confidence < records.search(records.root, term).confidence){
+            System.out.println("Term with higher confidence already in database.");
         }
         else {
             records.addNode(term, statement, confidence);
-            System.out.println("added");
+            System.out.println("Added.");
         }
 
 

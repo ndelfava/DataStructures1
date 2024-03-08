@@ -48,12 +48,7 @@ public class ActionsArray {
                 }
             }
             System.out.println("All items updated.");
-
-
         }
-
-
-
 
     }
 
