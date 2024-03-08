@@ -57,13 +57,6 @@ public class ActionsArray {
 
     }
 
-//    public static void addStatement(String term, String statement, double confidence) {
-//
-//        Record record = new Record(term, statement, confidence);
-//        //addToBST(record);
-//
-//        System.out.println("added");
-//    }
 
     public static void searchByTerm(String t) {
         if (records == null) {

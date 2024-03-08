@@ -1,15 +1,14 @@
 import java.io.FileNotFoundException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
-
-import static java.lang.Double.parseDouble;
 
 
 public class GenericsKbArrayApp {
 
-    static int action;
+    static String action;
 
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, InputMismatchException {
 
         final Scanner keyboard = new Scanner(System.in);
 
@@ -21,26 +20,38 @@ public class GenericsKbArrayApp {
                 "4. Quit\n" +
                 "Enter your choice: ");
 
-        action = keyboard.nextInt();
+
+        action = keyboard.next();
+
         keyboard.nextLine();
 
-        while (action != 4) {
+        while (true) {
+            try {
+                Integer.parseInt(action);
+                break;
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number.");
+                System.out.println("Choose an action from the menu:\n" +
+                        "1. Load a knowledge base from a file\n" +
+                        "2. Add a new statement to the knowledge base\n" +
+                        "3. Search for an item in the knowledge base by term\n" +
+                        "4. Search for a item in the knowledge base by term and sentence\n" +
+                        "5. Quit\n" +
+                        "Enter your choice: ");
+                action = keyboard.next();
+                keyboard.nextLine();
+            }
+        }
 
-            switch (action) {
+        while (Integer.parseInt(action) != 4) {
+
+            switch (Integer.parseInt(action)) {
                 case 1:
                     System.out.println("Enter file name: ");
                     String filename = keyboard.nextLine();
                     ActionsArray.loadKb(filename);
                     break;
-//                case 2:
-//                    System.out.println("Enter the term: ");
-//                    String addTerm = keyboard.nextLine();
-//                    System.out.println("Enter the statement: ");
-//                    String addState = keyboard.nextLine();
-//                    System.out.println("Enter the confidence score: ");
-//                    double confidence = parseDouble(keyboard.nextLine());
-//                    actions.addStatement(addTerm, addState, confidence);
-//                    break;
                 case 2:
                     System.out.println("Enter the term to search: ");
                     String term = keyboard.nextLine();
@@ -55,24 +66,25 @@ public class GenericsKbArrayApp {
                     break;
                 case 4:
                     System.exit(0);
-
                     break;
                 default:
                     System.out.println("Please enter a number between 1-4 and try again: ");
-                    action = keyboard.nextInt();
                     break;
-                }
+            }
             System.out.println("Choose an action from the menu:\n" +
                     "1. Load a knowledge base from a file\n" +
                     "2. Search for an item in the knowledge base by term\n" +
                     "3. Search for a item in the knowledge base by term and sentence\n" +
                     "4. Quit\n" +
                     "Enter your choice: ");
-            action = keyboard.nextInt();
+            action = keyboard.next();
             keyboard.nextLine();
-            }
-
         }
 
 
     }
+
+
+}
+
+
